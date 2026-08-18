@@ -12,7 +12,7 @@ struct structMessage myData; //structured object
 
 void OnDataRecv(const esp_now_recv_info_t *info, const uint8_t *incomingData, int len) { //receive - side callback active immediately upon packet arriving, so loop can stay empty
   memcpy(&myData, incomingData, sizeof(myData)); //&myData is the destination (address of your local struct), incomingData is the source pointer (already a uint8_t* since memcpy's 
-  // destination/source parameters are void*, which any pointer type converts to implicitly) and sizeof(myData) defines how many bytes to copy
+  // destination/source parameters are void*, which any pointer type converts to implicitly and sizeof(myData) defines how many bytes to copy
   Serial.print("data received");
   Serial.println(len);
   Serial.print("Character object received: ");
@@ -33,7 +33,6 @@ void setup() {
   return; 
   }
   esp_now_register_recv_cb(OnDataRecv);
-
 }
 
 void loop() {
